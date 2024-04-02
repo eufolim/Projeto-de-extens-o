@@ -1,0 +1,124 @@
+import os
+import pickle as pk
+import tkinter as tk
+from quantulum3 import parser
+from deep_translator import GoogleTranslator as gt
+
+receitas = []
+cursorY = 0
+cursorX = 0
+window = "menu"
+
+class Receita:
+    def __init__(self, nome, ingredientes, resultado):
+        self.nome = nome
+        self.ingredientes = ingredientes
+        self.resultado = resultado
+
+class Ingrediente:
+    def __init__(self, quant, string):
+        self.string = string
+        self.quant = quant
+
+def reset(newWindow):
+    global cursorY, cursorX, window
+    cursorY = 0
+    cursorX = 0
+    window = newWindow
+
+def incluir():
+    global receitas
+    nomeReceita = entry_nome_receita.get()
+    ingredientes = []
+    count = 0
+    while True:
+        count += 1
+        item = entry_ingredientes.get()
+        quant = parser.parse(gt(source="auto", target="en").translate(item))
+        if not quant:
+            break
+        ingredientes.append(Ingrediente(quant, item))
+    texto = entry_quantidade_resultante.get()
+    valor = parser.parse(texto)
+    resultado = {"texto": texto, "valor": valor}
+    salvar = Receita(nomeReceita, ingredientes, resultado)
+    pk.dump(salvar, open("saves/" + salvar.nome, "wb"))
+    reset("menu")
+    menu()
+
+def search():
+    global receitas
+    receitas = []
+    files = os.listdir("saves/")
+    for x in files:
+        receitas.append(pk.load(open("saves/" + x, "rb")))
+    return receitas
+
+def menu():
+    global window
+    window = "menu"
+    reset("menu")
+    display()
+
+def deletar():
+    global window, cursorY
+    if cursorY < len(receitas):
+        os.remove("saves/" + receitas[cursorY].nome)
+    menu()
+
+def display():
+    os.system("cls")
+    if window == "menu":
+        if not receitas:
+            print("- Nenhuma receita cadastrada -\n")
+        else:
+            print("Receitas:\n")
+            for x in range(len(receitas)):
+                print("> " + receitas[x].nome if x == cursorY else "  " + receitas[x].nome)
+            print("")
+    elif window == "deletar":
+        print("Receitas:\n")
+        for x in range(len(receitas)):
+            print("> " + receitas[x].nome if x == cursorY else "  " + receitas[x].nome)
+        print("")
+
+def on_enter(event=None):
+    global cursorY
+    cursorY += 1
+    display()
+
+def on_delete(event=None):
+    global cursorY
+    cursorY -= 1
+    display()
+
+# Create the main window
+root = tk.Tk()
+root.title("Receitas")
+
+# Create and place widgets
+label_nome_receita = tk.Label(root, text="Nome da Receita:")
+label_nome_receita.pack()
+
+entry_nome_receita = tk.Entry(root)
+entry_nome_receita.pack()
+
+label_ingredientes = tk.Label(root, text="Ingredientes:")
+label_ingredientes.pack()
+
+entry_ingredientes = tk.Entry(root)
+entry_ingredientes.pack()
+
+label_quantidade_resultante = tk.Label(root, text="Quantidade Resultante:")
+label_quantidade_resultante.pack()
+
+entry_quantidade_resultante = tk.Entry(root)
+entry_quantidade_resultante.pack()
+
+button_incluir = tk.Button(root, text="Incluir", command=incluir)
+button_incluir.pack()
+
+button_deletar = tk.Button(root, text="Deletar", command=deletar)
+button_deletar.pack()
+
+root.mainloop()
