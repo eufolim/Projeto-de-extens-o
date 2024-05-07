@@ -16,13 +16,16 @@ class receita:
         self.ingredientes = ingredientes
         self.resultado = resultado
 
+    
+    
+
 class ingrediente:
     def __init__(self,quant,string) -> None:
         self.string = string
         self.quant = quant
         
-    #def ajustes(self,valor):
-        #self.valor = self.valor*float(valor)
+    def ajustes(self,valor):
+        self.valor = self.valor*float(valor)
 
 def hook():
     keyboard.on_press_key("up",key,True)
@@ -44,6 +47,22 @@ def reset(newWindow):
 
 def enter(receitas):
     global cursorY, cursorX, window
+    try: window == int(window) 
+    except:pass
+    else:
+        if cursorX == 0:
+            cursorX = 0
+            keyboard.wait("enter",True,True)
+            unHook()
+            #ajustar(receitas[cursorY])
+        elif cursorX == 1:
+            pass
+        elif cursorX ==2:
+            cursorX = 0
+            window = "menu"
+            keyboard.wait("enter",True,True)
+            unHook()
+            menu(receitas)
     if window == "menu":
         if len(receitas) == 0:
             if cursorX == 0:
@@ -53,37 +72,49 @@ def enter(receitas):
                 incluir(receitas)
             if cursorX == 1:
                 exit()
-        elif cursorY == len(receitas):
+        elif cursorY == (len(receitas) or -1):
             if cursorX == 0:
                 reset("incluir")
                 keyboard.wait("enter",True,True)
                 unHook()
                 incluir(receitas)
             if cursorX == 1:
-                reset("deletar")
-                deletar(receitas)
+                pass
+                #reset("deletar")
+                #deletar(receitas)
             if cursorX == 2:
                 exit()
         else:
-            pass
-    elif window == "deletar":
-        if cursorY == len(receitas):
-            reset("menu")
+            window = int(cursorY)
+            keyboard.wait("enter",True,True)
+            unHook()
             menu(receitas)
-        else:
-            pass
+    #elif window == "deletar":
+        #if cursorY == len(receitas):
+            #reset("menu")
+            #menu(receitas)
+        #else:
+            #pass
     
             
         
         
 def key(value):
     global cursorY, cursorX, receitas
+    try: window == int(window)
+    except: pass
+    else:
+        if value.name == "left" and cursorX > 0 :
+            cursorX -= 1
+        if value.name == "right" and cursorX < 2 :
+            cursorX += 1
+        display(receitas,cursorY,cursorX,window)
     if window == "menu":
         if value.name == "up" and cursorY > 0 :
             cursorY -= 1
         if value.name == "down" and cursorY < len(receitas) :
             cursorY += 1
-        if value.name == "right" and cursorY == len(receitas) :
+        if value.name == "right" and cursorY == len(receitas):
             if len(receitas) == 0 and cursorX < 1:
                 cursorX += 1
             elif cursorX < 2:
@@ -135,10 +166,10 @@ def search():
 #    menu(search(receitas))
 
 def menu(receitas):
-    global window
+    global window, cursorY, cursorX
     print("Receitas:\n")
     hook()
-    display(receitas,0,0,window)
+    display(receitas,cursorY,cursorX,window)
     keyboard.wait("enter",True)
     enter(receitas)
     
@@ -152,9 +183,52 @@ def deletar(receitas):
         os.remove("saves/"+receitas[cursorY].nome)
     menu(search())
 
-def display(receitas,cursorY,cursorX,window):
+def display(receitas,cursorY,cursorX,window,):
     os.system("cls")
-    if window == "menu" :
+    if window == "menu" or window == int(window):
+        #if cursorY == -1 :
+            #if cursorX == 0:
+                #print("[Nova]"," Buscar "," Sair ")
+            #elif cursorX == 1:
+                #print(" Nova ","[Buscar]"," Sair ")
+            #else :
+                #print(" Nova "," Buscar ","[Sair]")
+        #else:
+            #print(" Nova "," Buscar ", " Sair")
+        print("\nReceitas:\n")
+        size = 3
+        if cursorY == len(receitas) or cursorY == 0:
+            test = size
+        else:
+            test = size-2
+        count = 0
+        for x in range(0,len(receitas)) :
+            if count < size:
+                if x in range(cursorY-test,cursorY+test+1):
+                    count += 1
+                    if x == window :
+                        print("> "+receitas[x].nome)
+                        if cursorX == 0:
+                            print("    [Alterar]"," Deletar "," Voltar ")
+                        elif  cursorX == 1:
+                            print("     Alterar ","[Deletar]"," Voltar ")
+                        elif cursorX ==2:
+                            print("     Alterar "," Deletar ","[Voltar]")
+                    else:
+                        print("> "+receitas[x].nome if x == cursorY else "  "+receitas[x].nome)
+        print("")
+        if cursorY == len(receitas) :
+            if cursorX == 0:
+                print("[Nova]"," Buscar "," Sair ")
+            elif cursorX == 1:
+                print(" Nova ","[Buscar]"," Sair ")
+            else :
+                print(" Nova "," Buscar ","[Sair]")
+        else:
+            print(" Nova "," Buscar ", " Sair")    
+    elif window == "ajustar" :
+        pass
+    else:
         if receitas == [] :
             print("- Nenhuma receita cadastrada -\n") 
             if cursorY == len(receitas) :
@@ -162,34 +236,25 @@ def display(receitas,cursorY,cursorX,window):
                     print("[Nova]"," Sair ")
                 else :
                     print(" Nova ","[Sair]")
-        else:
-            print("Receitas:\n")
-            for x in range(0,len(receitas)) :
-                print("> "+receitas[x].nome if x == cursorY else "  "+receitas[x].nome)
-            print("")
-            if cursorY == len(receitas) :
-                if cursorX == 0:
-                    print("[Nova]"," Deletar "," Sair ")
-                elif cursorX == 1:
-                    print(" Nova ","[Deletar]"," Sair ")
-                else :
-                    print(" Nova "," Deletar ","[Sair]")
-            else:
-                print(" Nova "," Deletar ", " Sair")
-    elif window == "deletar" :
-        print("Receitas:\n")
-        for x in range(0,len(receitas)) :
-            print("> "+receitas[x].nome if x == cursorY else "  "+receitas[x].nome)
-        print("")
-        if cursorY == len(receitas):
-            print("[Voltar]")
-        else:
-            print(" Voltar ")
-    elif window == "ajustar" :
-        pass
+        
+
+def alterar(receita) :
+    print(receita.nome,"\n")
+    for x in receita.ingredientes :
+        print(x.quant,x.uni+"s" if x.quant >= 2 else x.uni,"de",x.nome)
        
-def ajustar(ingredientes,total):
-    pass
+def ajustar(receita):
+    os.system("cls")
+    alterar(receita)
+    print("\nFaz:",receita.resultato,"\n")
+    ajuste = input("Ajuste: ")
+    valor = (float(ajuste)/float(receita.resultado))
+    for x in receita.ingredientes :
+        x.ajustes(valor)
+    os.system("cls")
+    alterar(receita)
+    receita.resultado = ajuste
+    print("\nFaz:",receita.resultado,"\n")
     
 menu(search())
 
