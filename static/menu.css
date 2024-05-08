@@ -1,0 +1,14 @@
+/* Estilos para o corpo do documento */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000000;
+    margin: 10;
+    padding: 10;
+}
+
+/* Estilos para o cabeçalho h1 */
+h1 {
+    color: #333;
+    text-align: center;
+    margin-top: 50px;
+}
