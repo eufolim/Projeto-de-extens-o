@@ -5,5 +5,7 @@ Vou organisar melhor os arquivos no porximo commit, use receita3 por enquanto -L
 # Telas nescessarias:
 
 Menu principal (com as receitas)
+
 Tela de cadastro
+
 Tela de ajuste
