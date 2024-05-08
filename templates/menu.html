@@ -11,9 +11,9 @@
         <h1>Menu Principal</h1>
         <nav>
             <ul>
-                <li><a href="menu.html">Home</a></li>
-                <li><a href="cadastro.html">Cadastro de receitas</a></li>
-                <li><a href="ajuste.html">Ajuste de receitas</a></li>
+                <li><a href="{{ url_for('hello') }}">Home</a></li>
+                <li><a href="{{ url_for('cadastro') }}">Cadastro de receitas</a></li>
+                <li><a href="{{ url_for('ajuste') }}">Ajuste de receitas</a></li>
             </ul>
         </nav>
     </header>
