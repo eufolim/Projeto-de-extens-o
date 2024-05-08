@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajustes</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='menu.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Ajustes</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('hello') }}">Home</a></li>
+                <li><a href="{{ url_for('cadastro') }}">Cadastro de receitas</a></li>
+                <li><a href="{{ url_for('ajuste') }}">Ajuste de receitas</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div>
+            <h2>Bem-vindo ao seus ajustes!</h2>
+            <p>Aqui você conseguirá ajustar suas receitas, diga nos o quanto você quer de uma receita que calculamos para você!</p>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Trabalho estatística aplicada.</p>
+    </footer>
+</body>
+</html>
