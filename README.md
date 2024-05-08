@@ -6,6 +6,6 @@ Vou organisar melhor os arquivos no porximo commit, use receita3 por enquanto -L
 
 Menu principal (com as receitas)
 
-Tela de cadastro
+Tela de cadastro de receitas
 
-Tela de ajuste
+Tela de ajuste de receitas
