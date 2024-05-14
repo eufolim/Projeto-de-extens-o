@@ -19,8 +19,21 @@
     </header>
     <main>
         <div>
-            <h2>Bem-vindo ao nosso site!</h2>
-            <p>Explore nossos serviços e entre em contato conosco se precisar de mais informações.</p>
+            <h2>Receitas</h2>
+            <ul>
+                {% for recipe in recipes %}
+                    <li>
+                        <strong>{{ recipe.name }}</strong>
+                        <ul>
+                            {% for key, value in recipe.items() %}
+                                {% if key.startswith('ingredient-') %}
+                                    <li>{{ value }}: {{ recipe['quantity-' + key.split('-')[1]] }} gramas</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
     </main>
     <footer>

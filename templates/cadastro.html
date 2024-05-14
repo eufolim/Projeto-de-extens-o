@@ -3,12 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastros</title>
+    <title>Cadastro de Receitas</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='menu.css') }}">
+    <script>
+        let ingredientCount = 1;
+
+        function addIngredient() {
+            ingredientCount++;
+            const ingredientDiv = document.createElement('div');
+            ingredientDiv.id = 'ingredient-' + ingredientCount;
+            ingredientDiv.innerHTML = `
+                <label for="ingredient-${ingredientCount}">Ingrediente ${ingredientCount}:</label>
+                <input type="text" name="ingredient-${ingredientCount}" id="ingredient-${ingredientCount}" required>
+                <label for="quantity-${ingredientCount}">Quantidade:</label>
+                <input type="number" name="quantity-${ingredientCount}" id="quantity-${ingredientCount}" required>
+            `;
+            document.getElementById('ingredients').appendChild(ingredientDiv);
+        }
+
+        function calculateTotal() {
+            let total = 0;
+            for (let i = 1; i <= ingredientCount; i++) {
+                const quantity = document.getElementById('quantity-' + i).value;
+                total += parseFloat(quantity) || 0;
+            }
+            document.getElementById('total').innerText = 'Total: ' + total;
+        }
+    </script>
 </head>
 <body>
     <header>
-        <h1>Cadastros</h1>
+        <h1>Cadastro de Receitas</h1>
         <nav>
             <ul>
                 <li><a href="{{ url_for('hello') }}">Home</a></li>
@@ -21,6 +46,24 @@
         <div>
             <h2>Bem-vindo ao seus cadastros!</h2>
             <p>Aqui você conseguirá cadastrar suas receitas!</p>
+            <form action="{{ url_for('save_recipe') }}" method="post">
+                <div>
+                    <label for="recipe_name">Nome da Receita:</label>
+                    <input type="text" name="recipe_name" id="recipe_name" required>
+                </div>
+                <div id="ingredients">
+                    <div id="ingredient-1">
+                        <label for="ingredient-1">Ingrediente 1:</label>
+                        <input type="text" name="ingredient-1" id="ingredient-1" required>
+                        <label for="quantity-1">Quantidade:</label>
+                        <input type="number" name="quantity-1" id="quantity-1" required>
+                    </div>
+                </div>
+                <button type="button" onclick="addIngredient()">Adicionar Ingrediente</button>
+                <button type="button" onclick="calculateTotal()">Calcular Total</button>
+                <p id="total">Total: 0</p>
+                <button type="submit">Salvar Receita</button>
+            </form>
         </div>
     </main>
     <footer>

@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajuste de Receitas</title>
+    <title>Ajustar Receita</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='menu.css') }}">
 </head>
 <body>
     <header>
-        <h1>Ajuste de Receitas</h1>
+        <h1>Ajustar Receita: {{ recipe.name }}</h1>
         <nav>
             <ul>
                 <li><a href="{{ url_for('hello') }}">Home</a></li>
@@ -19,15 +19,12 @@
     </header>
     <main>
         <div>
-            <h2>Receitas</h2>
-            <ul>
-                {% for recipe in recipes %}
-                    <li>
-                        {{ recipe.name }} - 
-                        <a href="{{ url_for('adjust_recipe', recipe_id=recipe.id) }}">Ajustar</a>
-                    </li>
-                {% endfor %}
-            </ul>
+            <h2>Ajustar Tamanho da Receita</h2>
+            <form action="{{ url_for('adjust_recipe', recipe_id=recipe_id) }}" method="post">
+                <label for="new_total">Novo Total em Gramas:</label>
+                <input type="number" name="new_total" id="new_total" required>
+                <button type="submit">Ajustar Receita</button>
+            </form>
         </div>
     </main>
     <footer>
