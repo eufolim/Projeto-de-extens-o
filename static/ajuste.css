@@ -83,8 +83,9 @@ main ul li a {
 }
 
 main ul li a:hover {
-    color: #333;
+    color: rgb(25, 175, 20);
 }
+
 
 footer {
     background-color: #333;

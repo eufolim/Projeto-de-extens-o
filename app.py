@@ -44,12 +44,14 @@ def adjust_recipe(recipe_id):
 
     if request.method == 'POST':
         new_total = float(request.form.get('new_total'))
-        old_total = sum(float(value) for key, value in recipe.items() if key.startswith('quantity-'))
+        old_total = sum(float(value) for key, value in recipe.items() if key.startswith('quantity-') and recipe[f'unit-{key.split("-")[1]}'] == 'grams')
         adjustment_ratio = new_total / old_total
 
         for key in recipe:
             if key.startswith('quantity-'):
-                recipe[key] = round(float(recipe[key]) * adjustment_ratio, 3)  # Arredondar para 3 casas decimais
+                ingredient_index = key.split('-')[1]
+                if recipe[f'unit-{ingredient_index}'] == 'grams':
+                    recipe[key] = round(float(recipe[key]) * adjustment_ratio, 3)  # Arredondar para 3 casas decimais
 
         with open(recipe_path, 'w') as f:
             json.dump(recipe, f)
@@ -65,9 +67,9 @@ def save_recipe():
     recipe['name'] = recipe_name
 
     for key, value in request.form.items():
-        if key.startswith('ingredient-') or key.startswith('quantity-'):
+        if key.startswith('ingredient-') or key.startswith('quantity-') or key.startswith('unit-'):
             recipe[key] = value
-            
+
     # Salvar receita em um arquivo JSON
     recipe_id = len(os.listdir(DATA_DIR)) + 1
     with open(os.path.join(DATA_DIR, f'recipe_{recipe_id}.json'), 'w') as f:

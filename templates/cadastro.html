@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Receitas</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='menu.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='cadastro.css') }}">
     <script>
         let ingredientCount = 1;
@@ -17,6 +18,11 @@
                 <input type="text" name="ingredient-${ingredientCount}" id="ingredient-${ingredientCount}" required>
                 <label for="quantity-${ingredientCount}">Quantidade:</label>
                 <input type="number" name="quantity-${ingredientCount}" id="quantity-${ingredientCount}" required>
+                <label for="unit-${ingredientCount}">Unidade de Medida:</label>
+                <select name="unit-${ingredientCount}" id="unit-${ingredientCount}" required>
+                    <option value="grams">Gramas</option>
+                    <option value="units">Unidades</option>
+                </select>
             `;
             document.getElementById('ingredients').appendChild(ingredientDiv);
         }
@@ -25,7 +31,10 @@
             let total = 0;
             for (let i = 1; i <= ingredientCount; i++) {
                 const quantity = document.getElementById('quantity-' + i).value;
-                total += parseFloat(quantity) || 0;
+                const unit = document.getElementById('unit-' + i).value;
+                if (unit === 'grams') {
+                    total += parseFloat(quantity) || 0;
+                }
             }
             document.getElementById('total').innerText = 'Total: ' + total + ' gramas';
         }
@@ -46,7 +55,6 @@
         <div>
             <h2>Bem-vindo ao seus cadastros!</h2>
             <p>Aqui você conseguirá cadastrar suas receitas!</p>
-            <br><br>
             <form action="{{ url_for('save_recipe') }}" method="post">
                 <div>
                     <label for="recipe_name">Nome da Receita:</label>
@@ -56,8 +64,13 @@
                     <div id="ingredient-1">
                         <label for="ingredient-1">Ingrediente 1:</label>
                         <input type="text" name="ingredient-1" id="ingredient-1" required>
-                        <label for="quantity-1">Quantidade em gramas:</label>
+                        <label for="quantity-1">Quantidade:</label>
                         <input type="number" name="quantity-1" id="quantity-1" required>
+                        <label for="unit-1">Unidade de Medida:</label>
+                        <select name="unit-1" id="unit-1" required>
+                            <option value="grams">Gramas</option>
+                            <option value="units">Unidades</option>
+                        </select>
                     </div>
                 </div>
                 <button type="button" onclick="addIngredient()">Adicionar Ingrediente</button>

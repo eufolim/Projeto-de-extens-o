@@ -26,6 +26,14 @@
                 <button type="submit">Ajustar Receita</button>
             </form>
         </div>
+        <div>
+            <h2>Ingredientes</h2>
+            <ul>
+                {% for key, value in recipe.items() if key.startswith('ingredient-') %}
+                    <li>{{ value }}: {{ recipe['quantity-' + key.split('-')[1]] }} {{ recipe['unit-' + key.split('-')[1]] }}</li>
+                {% endfor %}
+            </ul>
+        </div>
     </main>
     <footer>
         <p>&copy; 2024 Trabalho estatística aplicada.</p>

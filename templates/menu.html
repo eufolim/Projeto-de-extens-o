@@ -29,7 +29,7 @@
                                 {% if key.startswith('ingredient-') %}
                                     <li>
                                         <strong>{{ value }}</strong>: 
-                                        <span>{{ recipe['quantity-' + key.split('-')[1]] }} gramas</span>
+                                        <span>{{ recipe['quantity-' + key.split('-')[1]] }} {{ recipe['unit-' + key.split('-')[1]] }}</span>
                                     </li>
                                 {% endif %}
                             {% endfor %}
