@@ -7,6 +7,8 @@
 html, body {
     height: 100%;
     margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
 }
 
 body {
@@ -19,10 +21,12 @@ header {
     color: #fff;
     padding: 20px 0;
     text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 nav ul {
     list-style-type: none;
+    padding: 0;
 }
 
 nav ul li {
@@ -33,12 +37,53 @@ nav ul li {
 nav ul li a {
     color: #fff;
     text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: rgb(25, 175, 20);
 }
 
 main {
-    padding: 20px;
+    padding: 40px;
     text-align: left;
     flex: 1;
+    background-color: #fff;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 1200px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+main h2 {
+    margin-bottom: 20px;
+    color: #333;
+    border-bottom: 2px solid black;
+    padding-bottom: 10px;
+}
+
+main ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+main ul li {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #555;
+}
+
+main ul li a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+main ul li a:hover {
+    color: #333;
 }
 
 footer {
@@ -47,4 +92,10 @@ footer {
     text-align: center;
     padding: 10px 0;
     width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+footer p {
+    margin: 0;
 }

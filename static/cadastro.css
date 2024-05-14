@@ -7,6 +7,8 @@
 html, body {
     height: 100%;
     margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
 }
 
 body {
@@ -19,10 +21,12 @@ header {
     color: #fff;
     padding: 20px 0;
     text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 nav ul {
     list-style-type: none;
+    padding: 0;
 }
 
 nav ul li {
@@ -33,12 +37,93 @@ nav ul li {
 nav ul li a {
     color: #fff;
     text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: rgb(25, 175, 20);
 }
 
 main {
-    padding: 20px;
+    padding: 40px;
     text-align: center;
     flex: 1;
+    background-color: #fff;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 800px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+main h2 {
+    margin-bottom: 20px;
+    color: #333;
+    border-bottom: 2px solid black;
+    padding-bottom: 10px;
+}
+
+main p {
+    color: #555;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form div {
+    margin-bottom: 15px;
+    width: 100%;
+    text-align: left;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: calc(100% - 20px);
+    display: block;
+    margin: 0 auto;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #f2f2f2;
+}
+
+#recipe_name {
+    background-color: #e8f5e9;
+}
+
+button[type="button"],
+button[type="submit"] {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+button[type="button"]:hover,
+button[type="submit"]:hover {
+    background-color: #388E3C;
+}
+
+#total {
+    margin-top: 20px;
+    font-weight: bold;
+    color: #333;
 }
 
 footer {
@@ -47,37 +132,10 @@ footer {
     text-align: center;
     padding: 10px 0;
     width: 100%;
+    position: fixed;
+    bottom: 0;
 }
 
-input[type="text"],
-input[type="number"] {
-    width: 30%;
-    display: block;
-    margin: 0 auto;
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-/* Alteração para cor diferente na caixa do nome da receita */
-#recipe_name {
-    background-color: #f2f2f2; /* Cor de fundo diferente */
-}
-
-button[type="button"],
-button[type="submit"] {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 10px; /* Espaçamento entre os botões */
-}
-
-button[type="button"]:hover,
-button[type="submit"]:hover {
-    background-color: #555;
+footer p {
+    margin: 0;
 }
