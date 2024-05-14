@@ -49,7 +49,7 @@ def adjust_recipe(recipe_id):
 
         for key in recipe:
             if key.startswith('quantity-'):
-                recipe[key] = float(recipe[key]) * adjustment_ratio
+                recipe[key] = round(float(recipe[key]) * adjustment_ratio, 3)  # Arredondar para 3 casas decimais
 
         with open(recipe_path, 'w') as f:
             json.dump(recipe, f)
