@@ -1,4 +1,0 @@
-# Ignorar todos os arquivos na pasta
-data/*
-# Exceto a própria pasta
-!data/
