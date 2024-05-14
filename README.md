@@ -2,16 +2,7 @@
 
 Aqui está o nosso front end!!
 
-# Telas nescessarias:
-
-Menu principal (com as receitas)
-
-Tela de cadastro de receitas
-
-Tela de ajuste de receitas
-
-
-#Para rodar!!
+# Para rodar!!
 
 pip install flask
 
