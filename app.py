@@ -44,12 +44,12 @@ def adjust_recipe(recipe_id):
 
     if request.method == 'POST':
         new_total = float(request.form.get('new_total'))
-        old_total = sum(float(recipe[key]) for key in recipe if key.startswith('quantity-'))
+        old_total = sum(float(value) for key, value in recipe.items() if key.startswith('quantity-'))
         adjustment_ratio = new_total / old_total
 
-        for key, value in recipe.items():
+        for key in recipe:
             if key.startswith('quantity-'):
-                recipe[key] = float(value) * adjustment_ratio
+                recipe[key] = float(recipe[key]) * adjustment_ratio
 
         with open(recipe_path, 'w') as f:
             json.dump(recipe, f)
