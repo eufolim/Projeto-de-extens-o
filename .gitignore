@@ -1,4 +1,4 @@
 # Ignorar todos os arquivos na pasta
-pasta/*
+data/*
 # Exceto a própria pasta
-!pasta/
+!data/
