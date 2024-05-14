@@ -20,20 +20,23 @@
     <main>
         <div>
             <h2>Receitas</h2>
-            <ul>
+            <div class="recipe-container">
                 {% for recipe in recipes %}
-                    <li>
+                    <div class="recipe-card">
                         <strong>{{ recipe.name }}</strong>
                         <ul>
                             {% for key, value in recipe.items() %}
                                 {% if key.startswith('ingredient-') %}
-                                    <li>{{ value }}: {{ recipe['quantity-' + key.split('-')[1]] }} gramas</li>
+                                    <li>
+                                        <strong>{{ value }}</strong>: 
+                                        <span>{{ recipe['quantity-' + key.split('-')[1]] }} gramas</span>
+                                    </li>
                                 {% endif %}
                             {% endfor %}
                         </ul>
-                    </li>
+                    </div>
                 {% endfor %}
-            </ul>
+            </div>
         </div>
     </main>
     <footer>
