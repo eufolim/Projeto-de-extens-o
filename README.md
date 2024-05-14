@@ -15,4 +15,7 @@ Tela de ajuste de receitas
 
 pip install flask
 
+verifique se nao está incluindo nada dentro de data, lá que será salvo suas receitas
+caso possua algum arquivo, apague
+
 python app.py
