@@ -1,0 +1,4 @@
+# Ignorar todos os arquivos na pasta
+pasta/*
+# Exceto a própria pasta
+!pasta/
