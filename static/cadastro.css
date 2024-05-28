@@ -1,0 +1,138 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+
+    width: 100%;
+}
+
+nav ul {
+    list-style-type: none;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+main {
+   
+    padding: 10px;
+}
+form {
+    margin-top: 20px;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position:fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+main > div{
+    padding: 30px;
+    text-align: center;
+    flex: 1;
+    background-color: #fff;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 800px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    margin-bottom: 60px;
+}
+
+.count {
+    color: rgb(245, 243, 243);
+    background-color: rgb(25, 175, 20);
+    padding: 2px 6px 2px 6px;
+    border-radius: 3px;
+}
+
+button {
+    width: 400px;
+    align-self: center;
+}
+
+#title {
+    border-bottom: 2px solid black;
+    padding-bottom: 10px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    
+}
+
+#ingredientes {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+input[type="text"],
+input[type="number"] {
+    margin: 6px 2px;
+    padding: 4px;
+    border: 1px solid rgb(177, 177, 177);
+    border-radius: 4px;
+    background-color: #f8f8f8;
+}
+
+button[type="button"] {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 10px;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"] {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 10px;
+    transition: background-color 0.3s;
+    width: 200px;
+}
+
+button[type="button"]:hover,
+button[type="submit"]:hover {
+    background-color: #388E3C;
+}
+
+input[type="file"] {
+    margin: 4px;
+}

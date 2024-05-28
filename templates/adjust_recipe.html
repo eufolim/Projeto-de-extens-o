@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajustar Receita</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='adjust_recipe.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Ajustar Receita</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('hello') }}">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div>
+            <h1 id="title"><strong >{{ recipe.nome }}</strong></h1>
+            <ul id="list">
+                {% for x in recipe.ingredientes %}
+                    {% set count = loop.index%}
+                    <li>
+                        <label class="label">{{count}}</label>
+                        <p class="a">{{x.nome}}</p>
+                        <p class="b"><strong>{{x.valor}}</strong> </p>
+                        <p class="c">{{x.unidade}}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+            <p class="total"><strong>Total: </strong> {{recipe.total}} <strong> {{recipe.unidade}} <strong></p>
+            <div>
+                <h2>Ajustar Tamanho da Receita</h2>
+                <form action="{{ url_for('adjust_recipe', recipe_name=recipe.nome) }}" method="post">
+                    <label for="new_total">Novo Total em {{recipe.unidade}}:</label>
+                    <input type="number" name="new_total" id="new_total" required>
+                    <button type="submit">Ajustar Receita</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Trabalho estatística aplicada.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Principal</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='menu.css') }}">
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+</head>
+<body>
+    <header>
+        <h1>Menu Principal</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('cadastro') }}">Nova receita</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div id="main_box">
+            <h2>Receitas</h2>
+            <form>
+                {%set value = "" if searched == None else searched%}
+                <input type="text" name="search" id="search" placeholder="Buscar" value="{{value}}" method="GET">
+            </form>
+            <div id="recipe_list">
+                {% for receita in recipes %}
+                    <div class="recipe_card" id="{{ receita.nome }}">
+                        <div class="text"><strong>{{ receita.nome }}</strong></div>
+                        <div class="background">
+                            <div class="overlay"></div>
+                        </div>   
+                    </div>
+                    <script type="text/javascript">
+                        var test = "{{receita.nome}}";
+                        test = test.split(' ').join('_');
+                        window[test] = document.getElementById("{{ receita.nome }}");
+                        window[test].addEventListener("click", () => {window.location.href="{{ url_for('adjust_recipe', recipe_name=receita.nome) }}"});
+                        window[test].querySelector(".background").style.backgroundImage = 'url("{{receita.imagen}}")';
+                    </script>
+                {% endfor %}
+            </ul>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Trabalho estatística aplicada.</p>
+    </footer>
+</body>
+</html>
